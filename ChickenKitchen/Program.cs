@@ -16,20 +16,28 @@ namespace ChickenKitchen
 
 
 
-            string[] CustomerLine = File.ReadAllLines("CustomersAllergies.csv");
-            string[] CustomerData = CustomerLine[0].Split(',');
-            string[] DishLine = File.ReadAllLines("FoodIngredients.csv");
-            string[] DishData = DishLine[0].Split(',');
+            string[] customerLine = File.ReadAllLines("CustomersAllergies.csv");
+            string[] customerData = customerLine[0].Split(',');
+            string[] dishLine = File.ReadAllLines("FoodIngredients.csv");
+            string[] dishData = dishLine[0].Split(',');
 
-            Console.WriteLine($"{CustomerData[0]} , {DishData[0]} ");
+            Console.WriteLine($"{customerData[0]} , {dishData[0]} ");
 
-            if (CustomerData[1] != DishData[1] )
+
+            for (int i = 1; i < dishData.Length; i++)
             {
-                Console.WriteLine("Success: Order completed ");
-            }
-            else
-            {
-                Console.WriteLine($"Failed:{CustomerData[0]} cant order this dish, allergy for {DishData[1]}");
+                if (customerData[1] == dishData[i])
+                {
+                    Console.WriteLine($"{ customerData[0]} - { dishData[0]}: can't order, allergic to: {dishData[i]} ");
+                    break;
+                }
+                else if (i == dishData.Length - 1)
+                {
+                    
+                        Console.WriteLine($"{ customerData[0]} - { dishData[0]}: success");
+                    
+                }
+                    
             }
             
 
