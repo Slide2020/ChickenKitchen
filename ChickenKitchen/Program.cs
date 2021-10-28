@@ -26,7 +26,7 @@ namespace ChickenKitchen
             List<Dishes> listOfObjectDishes = new List<Dishes>();
             List<BaseIngriends> listOfObjectIngrients = new List<BaseIngriends>();
             List<Customers> listOfObjectCustomers = new List<Customers>();
-          
+
 
             for (int i = 0; i < listOfDishesWithIngredients.Count; i++)
             {
@@ -51,18 +51,18 @@ namespace ChickenKitchen
             Console.WriteLine("---------------------List of dishes--------------------");
             foreach (var eachdish in listOfObjectDishes)
             {
-                
+
                 Console.WriteLine(eachdish.Dish);
             }
 
             Console.WriteLine("Please write Full name of dish");
             var selectedDish = Console.ReadLine();
-           
 
-            string seletedIngrient = "";
 
-        
-            
+            List<string> ListOfSeletedIngrients = new List<string>();
+
+
+
             do
             {
                 foreach (var eachdish in listOfObjectDishes)
@@ -70,7 +70,11 @@ namespace ChickenKitchen
                     if (selectedDish == eachdish.Dish)
                     {
                         selectedDish = eachdish.Dish;
-                        seletedIngrient = eachdish.Ingredients[0];
+                        for (int i = 0; i < eachdish.Ingredients.Count; i++)
+                        {
+                            ListOfSeletedIngrients.Add(eachdish.Ingredients[i]);
+                        }
+
                         break;
                     }
 
@@ -91,20 +95,19 @@ namespace ChickenKitchen
                     || selectedDish == listOfObjectDishes[12].Dish.ToString()) break;
                 Console.WriteLine("There is no such dish, please try again");
                 selectedDish = Console.ReadLine();
-            }
-            while (selectedDish != listOfObjectDishes[0].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[1].Dish.ToString()
-                    || selectedDish != listOfObjectDishes[2].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[3].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[4].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[5].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[6].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[7].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[8].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[9].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[10].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[11].Dish.ToString() 
-                    || selectedDish != listOfObjectDishes[12].Dish.ToString());
+            } while (selectedDish != listOfObjectDishes[0].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[1].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[2].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[3].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[4].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[5].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[6].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[7].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[8].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[9].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[10].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[11].Dish.ToString()
+                     || selectedDish != listOfObjectDishes[12].Dish.ToString());
 
             //////////////////////////////////////////////////////////////////////
             Console.WriteLine("---------------------List of names--------------------");
@@ -121,7 +124,7 @@ namespace ChickenKitchen
             string seletedAllergic = "";
 
 
-            
+
             do
             {
                 foreach (var eachCustomer in listOfObjectCustomers)
@@ -140,40 +143,59 @@ namespace ChickenKitchen
                     || selectedCustomer == listOfObjectCustomers[2].FullName.ToString()
                     || selectedCustomer == listOfObjectCustomers[3].FullName.ToString()
                     || selectedCustomer == listOfObjectCustomers[4].FullName.ToString()
-                    || selectedCustomer == listOfObjectCustomers[5].FullName.ToString())break;
+                    || selectedCustomer == listOfObjectCustomers[5].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[6].FullName.ToString()) break;
                 Console.WriteLine("There is no such customer, please try again");
                 selectedCustomer = Console.ReadLine();
-            }
-            while (selectedCustomer != listOfObjectCustomers[0].FullName.ToString()
-                   || selectedCustomer != listOfObjectCustomers[1].FullName.ToString()
-                   || selectedCustomer != listOfObjectCustomers[2].FullName.ToString()
-                   || selectedCustomer != listOfObjectCustomers[3].FullName.ToString()
-                   || selectedCustomer != listOfObjectCustomers[4].FullName.ToString()
-                   || selectedCustomer != listOfObjectCustomers[5].FullName.ToString());
+            } while (selectedCustomer != listOfObjectCustomers[0].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[1].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[2].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[3].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[4].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[5].FullName.ToString()
+                     || selectedCustomer != listOfObjectCustomers[6].FullName.ToString());
 
 
-            Console.WriteLine(seletedIngrient);
             Console.WriteLine(seletedAllergic);
 
-
+            int y = 0;
+            int z = 0;
 
             foreach (var selectedIng in listOfObjectIngrients)
             {
-                if(String.Equals(seletedIngrient, selectedIng.Ingrient))
+                      for (int i = 0; i < ListOfSeletedIngrients.Count; i++)
                 {
-                   
-                    if (seletedIngrient == seletedAllergic)
-                    {
-                        Console.WriteLine("Nie można! alergia");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Mozna zamowic, brawo!");
-                        break;
-                    }
+                    if (String.Equals(ListOfSeletedIngrients[i], selectedIng.Ingrient))
+
+                        for (y = 0; y < ListOfSeletedIngrients.Count; y++)
+                        {
+                            if (ListOfSeletedIngrients[y] == seletedAllergic)
+                            {
+                                Console.WriteLine("Nie można! alergia");
+                                break;
+                            }
+                       
+                        }
+                    if(y==3)continue;
+                    if (ListOfSeletedIngrients[y] == seletedAllergic) break;
+
                 }
+
+                      z++;
+                if(z== listOfObjectIngrients.Count-1) Console.WriteLine("Udało się zamówić!");
+                if (y == 3) continue;
+                if (ListOfSeletedIngrients[y] == seletedAllergic) break;
+       
+               ;
             }
+
+
+          
+
+
+        }
+          
+
 
             //Orders order = new Orders();
 
@@ -193,9 +215,9 @@ namespace ChickenKitchen
 
         }
 
-
     }
-}
+
+
 
 
 
