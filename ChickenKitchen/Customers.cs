@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ChickenKitchen
 {
     public class Customers
     {
+
+
+        public string FullName;
+         public string Allergic;
+
+        public Customers(string rowCustomer)
+        {
+            List<string> data = rowCustomer.Split(',').ToList();
+
+            this.FullName = data[0];
+            this.Allergic = data[1];
+
+        }
+
 
 
 

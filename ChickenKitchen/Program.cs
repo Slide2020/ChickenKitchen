@@ -14,203 +14,185 @@ namespace ChickenKitchen
 
         {
 
-            //array gdzie [0] row z customerem i aleregia
-            var listOfCustomersWithALlergies = File.ReadAllLines("CustomersAllergies.csv");
 
+            //wersja z  szukaniem w petlach foreach na obiektach
 
-            //array gdzie [0] to klient, a każdy kolejny to alergia
-            var customerData = new List<string>();
+            //czyta zawartość i dzieli na wiersze(potrawa, skladnik, skladnik, skladnik)
+            List<string> listOfDishesWithIngredients = File.ReadAllLines("FoodIngredients.csv").ToList();
+            List<string> listOfBaseIngrients = File.ReadAllLines("BaseIngredients.csv").ToList();
+            List<string> listOfCustomers = File.ReadAllLines("CustomersAllergies.csv").ToList();
 
-            var listOfDishesWithIngredients = File.ReadAllLines("FoodIngredients.csv");
-            var eachIngredient = new List<string>();
+            //listy obiektowe
+            List<Dishes> listOfObjectDishes = new List<Dishes>();
+            List<BaseIngriends> listOfObjectIngrients = new List<BaseIngriends>();
+            List<Customers> listOfObjectCustomers = new List<Customers>();
+          
 
-            var selectedCustomerList = new List<string>();
-            var selectedDishList = new List<string>();
-
-
-
-            Customers.DisplayListOfCustomers();
-            Dishes.DisplayListOfDishes();
-            Console.WriteLine("---Make Order---");
-
-
-            Console.WriteLine("Please write Full name of customer");
-            var selectedCustomer = Console.ReadLine();
-            selectedCustomerList.Add(selectedCustomer);
-
-            while (selectedCustomerList != customerData)
+            for (int i = 0; i < listOfDishesWithIngredients.Count; i++)
             {
-                for (int i = 0; i < listOfCustomersWithALlergies.Length; i++)
-                {
-                    customerData = listOfCustomersWithALlergies[i].Split(',').ToList(); //[0] customer, [1] allergy
-                    if (selectedCustomer == customerData[0])
-                    {
-                        selectedCustomer = customerData[0];
-                        break;
-
-                    }
-                }
-
-                if (selectedCustomer == customerData[0])
-                {
-                    break;
-                }
-                Console.WriteLine("There is no such customer, please try again");
-                selectedCustomer = Console.ReadLine();
+                Dishes dish = new Dishes(listOfDishesWithIngredients[i]);
+                listOfObjectDishes.Add(dish);
             }
 
+            for (int i = 0; i < listOfBaseIngrients.Count; i++)
+            {
+                BaseIngriends ingriend = new BaseIngriends(listOfBaseIngrients[i]);
+                listOfObjectIngrients.Add(ingriend);
+            }
+
+            for (int i = 0; i < listOfCustomers.Count; i++)
+            {
+                Customers customer = new Customers(listOfCustomers[i]);
+                listOfObjectCustomers.Add(customer);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////
+            Console.WriteLine("---------------------List of dishes--------------------");
+            foreach (var eachdish in listOfObjectDishes)
+            {
+                
+                Console.WriteLine(eachdish.Dish);
+            }
 
             Console.WriteLine("Please write Full name of dish");
             var selectedDish = Console.ReadLine();
-            selectedDishList.Add(selectedDish);
+           
 
-            while (selectedDishList != eachIngredient)
+            string seletedIngrient = "";
+
+        
+            
+            do
             {
-                for (int i = 0; i < listOfDishesWithIngredients.Length; i++)
+                foreach (var eachdish in listOfObjectDishes)
                 {
-                    eachIngredient = listOfDishesWithIngredients[i].Split(',').ToList(); //[0] customer, [1] allergy
-                    if (selectedDish == eachIngredient[0])
+                    if (selectedDish == eachdish.Dish)
                     {
-                        selectedDish = eachIngredient[0]; 
+                        selectedDish = eachdish.Dish;
+                        seletedIngrient = eachdish.Ingredients[0];
                         break;
-
                     }
+
                 }
 
-                if (selectedDish == eachIngredient[0])
-                {
-                    break;
-                }
+                if (selectedDish == listOfObjectDishes[0].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[1].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[2].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[3].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[4].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[5].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[6].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[7].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[8].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[9].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[10].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[11].Dish.ToString()
+                    || selectedDish == listOfObjectDishes[12].Dish.ToString()) break;
                 Console.WriteLine("There is no such dish, please try again");
                 selectedDish = Console.ReadLine();
             }
+            while (selectedDish != listOfObjectDishes[0].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[1].Dish.ToString()
+                    || selectedDish != listOfObjectDishes[2].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[3].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[4].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[5].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[6].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[7].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[8].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[9].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[10].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[11].Dish.ToString() 
+                    || selectedDish != listOfObjectDishes[12].Dish.ToString());
 
-            for (int i = 0; i < listOfDishesWithIngredients.Length; i++)
+            //////////////////////////////////////////////////////////////////////
+            Console.WriteLine("---------------------List of names--------------------");
+            foreach (var eachCustomer in listOfObjectCustomers)
             {
-                int y;
-                eachIngredient = listOfDishesWithIngredients[i].Split(',').ToList(); // [0] = main dish
-                customerData = listOfCustomersWithALlergies[1].Split(',').ToList(); //[0] customer, [1] allergy
 
-                for (y = 1; y < eachIngredient.Count; y++)
+                Console.WriteLine(eachCustomer.FullName);
+            }
+
+            Console.WriteLine("Please write Full name of customer");
+            var selectedCustomer = Console.ReadLine();
+
+
+            string seletedAllergic = "";
+
+
+            
+            do
+            {
+                foreach (var eachCustomer in listOfObjectCustomers)
                 {
-                    if (customerData[1] == eachIngredient[y])
+                    if (selectedCustomer == eachCustomer.FullName)
                     {
-                        Console.WriteLine(
-                            $"{selectedCustomer} - {selectedDish}: can't order, allergic to: {eachIngredient[y]} \n");
-                        break;
-                    }
-                    else if (y == eachIngredient.Count - 1)
-                    {
-
-                        Console.WriteLine($"{selectedCustomer} - {selectedDish}: success \n");
+                        selectedCustomer = eachCustomer.FullName;
+                        seletedAllergic = eachCustomer.Allergic;
                         break;
                     }
 
                 }
-                if (y == eachIngredient.Count - 1)
+
+                if (selectedCustomer == listOfObjectCustomers[0].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[1].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[2].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[3].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[4].FullName.ToString()
+                    || selectedCustomer == listOfObjectCustomers[5].FullName.ToString())break;
+                Console.WriteLine("There is no such customer, please try again");
+                selectedCustomer = Console.ReadLine();
+            }
+            while (selectedCustomer != listOfObjectCustomers[0].FullName.ToString()
+                   || selectedCustomer != listOfObjectCustomers[1].FullName.ToString()
+                   || selectedCustomer != listOfObjectCustomers[2].FullName.ToString()
+                   || selectedCustomer != listOfObjectCustomers[3].FullName.ToString()
+                   || selectedCustomer != listOfObjectCustomers[4].FullName.ToString()
+                   || selectedCustomer != listOfObjectCustomers[5].FullName.ToString());
+
+
+            Console.WriteLine(seletedIngrient);
+            Console.WriteLine(seletedAllergic);
+
+
+
+            foreach (var selectedIng in listOfObjectIngrients)
+            {
+                if(String.Equals(seletedIngrient, selectedIng.Ingrient))
                 {
-                    break;
+                   
+                    if (seletedIngrient == seletedAllergic)
+                    {
+                        Console.WriteLine("Nie można! alergia");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Mozna zamowic, brawo!");
+                        break;
+                    }
                 }
             }
 
+            //Orders order = new Orders();
 
+            //Customers.DisplayListOfCustomers();
+            //Dishes.DisplayListOfDishes();
+            //order.MakeOrder();
 
-
-            //---------------------------------------
-
-            //int i = 0;
-
-            //    customerData = listOfCustomersWithALlergies[i].Split(','); //[0] customer, [1] allergy
-
-
-
-
-            //while (selectedCustomer != customerData[i])
+            //static List<Customers> GetCustomersList()
             //{
-            //    Console.WriteLine("There is no such customer, please try again");
-            //    selectedCustomer = Console.ReadLine();
-            //    i++;
-            //    if (selectedCustomer == customerData[0])
+            //    return new List<Customers>
             //    {
-            //        selectedCustomer = customerData[0];
-            //        Console.WriteLine("sukces");
-            //        break;
 
-            //    }
 
+            //    };
             //}
 
 
-            //for (int i = 0; i < listOfCustomersWithALlergies.Length; i++)
-            //{
-
-            //    // na odwrót ta pętla...
-
-            //    customerData = listOfCustomersWithALlergies[i].Split(','); //[0] customer, [1] allergy
-
-            //    Console.WriteLine("Please write Full name of customer");
-            //    var selectedCustomer = Console.ReadLine();
-            //    while (selectedCustomer != customerData[i])
-            //    {
-            //        Console.WriteLine("There is no such customer, please try again");
-            //        selectedCustomer = Console.ReadLine();
-            //    }
-
-            //    selectedCustomer = customerData[i];
-
-            //    Console.WriteLine(selectedCustomer);
-            //}
-
-            //Console.WriteLine("Please write Full name dish");
-            //var selectedDish = Console.ReadLine();
-
-
-
-
-
-
-
-
-
-
-
-
-            //string[] eachIngredient;
-            //string[] customerData;
-
-
-            //string[] listOfCustomersWithALlergies = File.ReadAllLines("CustomersAllergies.csv");
-
-            //string[] listOfDishesWithIngredients = File.ReadAllLines("FoodIngredients.csv");
-
-
-
-            //for (int y = 0; y < listOfDishesWithIngredients.Length; y++)
-            //{
-            //    eachIngredient = listOfDishesWithIngredients[y].Split(','); // [0] = main dish
-
-
-
-            //    Console.WriteLine($"{customerData[0]} , {eachIngredient[0]} ");
-
-            //    for (int i = 1; i < eachIngredient.Length; i++)
-            //    {
-            //        if (customerData[1] == eachIngredient[i])
-            //        {
-            //            Console.WriteLine(
-            //                $"{customerData[0]} - {eachIngredient[0]}: can't order, allergic to: {eachIngredient[i]} \n");
-            //            break;
-            //        }
-            //        else if (i == eachIngredient.Length - 1)
-            //        {
-
-            //            Console.WriteLine($"{customerData[0]} - {eachIngredient[0]}: success \n");
-
-            //        }
-
-            //    }
-            //}
         }
+
 
     }
 }
