@@ -95,19 +95,20 @@ namespace ChickenKitchen
                     || selectedDish == listOfObjectDishes[12].Dish.ToString()) break;
                 Console.WriteLine("There is no such dish, please try again");
                 selectedDish = Console.ReadLine();
-            } while (selectedDish != listOfObjectDishes[0].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[1].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[2].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[3].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[4].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[5].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[6].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[7].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[8].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[9].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[10].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[11].Dish.ToString()
-                     || selectedDish != listOfObjectDishes[12].Dish.ToString());
+            } while (listOfObjectDishes.Any(x => x.Dish.ToString() != selectedDish));
+            //(selectedDish != listOfObjectDishes[0].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[1].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[2].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[3].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[4].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[5].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[6].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[7].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[8].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[9].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[10].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[11].Dish.ToString()
+            //         || selectedDish != listOfObjectDishes[12].Dish.ToString());
 
             //////////////////////////////////////////////////////////////////////
             Console.WriteLine("---------------------List of names--------------------");
@@ -197,20 +198,7 @@ namespace ChickenKitchen
           
 
 
-            //Orders order = new Orders();
 
-            //Customers.DisplayListOfCustomers();
-            //Dishes.DisplayListOfDishes();
-            //order.MakeOrder();
-
-            //static List<Customers> GetCustomersList()
-            //{
-            //    return new List<Customers>
-            //    {
-
-
-            //    };
-            //}
 
 
         }
@@ -224,60 +212,3 @@ namespace ChickenKitchen
 
 
 
-
-
-//ENUM MOZE?
-
-
-//IN -> CustomersAllerg.csv, Food – Ingredients.csv, Base Ingredient List.csv, cosnole input 
-
-//Implementation
-
-//OUT -> console answer succes or fail
-
-
-/*CheckIfPersonHasAllergy(person, Alldishes)   //Julie Mirage – Fish in Water: success
- //FAZA I
-//{
-pickNameFromCustomers(customerFile)
-pickDishFromDishes(dishFile)
-CompareAllergic(customerfile, dishes)
-    pickAlergic
-    picksSkładniki
-    Compare everyone
-    return succes or faile 
-petla w petli
-//
-
-rozbic dishes na skladni jakims rozbijaczem
-
-FAZAII
-//{
-pickNameFromCustomers(customerFile)
-    readfilefromCSV
-    SplitToKolumns
-    getkolumn0.0
-    putKolumn0.0 jako jeden z parametrow i wrzuc na konsole
-pickDishFromDishes(dishFile)
- readfilefromCSV
-    SplitToKolumns
-    getkolumn0.0
-    putKolumn0.0 jako jeden z parametrow i wrzuc na konsole
-CompareAllergic(customerfile, dishes)
-    pickAlergic
-        readfilefromCSV
-        SplitToKolumns
-        getkolumn0.1
-    picksSkładniki
-         readfilefromCSV
-         SplitToKolumnsAlenawszstkieskladniki
-        getkolumnFromDO
-    Compare everyone
-    return succes or faile 
-petla w petli
-//
-
-rozbic dishes na skladni jakims rozbijaczem
-
-
-}*/
